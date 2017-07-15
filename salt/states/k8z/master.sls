@@ -1,0 +1,70 @@
+kube-worker-bins:
+  cmd.run:
+    - name:   |
+        wget https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-apiserver -P /usr/bin/
+        wget https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-controller-manager -P /usr/bin/
+        wget https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-scheduler -P /usr/bin/
+        wget https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl -P /usr/bin/
+        chmod +x /usr/bin/kube*
+
+kube-api-systemd:
+  file.managed:
+    - name: /etc/systemd/system/kube-api.service
+    - contents:  |
+        [Unit]
+        Description=Kubernetes API Server
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+        [Service]
+        ExecStart=/usr/bin/kube-apiserver --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota  --advertise-address=192.168.80.10  --allow-privileged=true  --apiserver-count=1  --audit-log-maxage=30  --audit-log-maxbackup=3  --audit-log-maxsize=100  --audit-log-path=/var/lib/audit.log  --authorization-mode=AlwaysAllow  --bind-address=0.0.0.0  --enable-swagger-ui=true  --etcd-servers=http://etcd.vagrant:2379  --event-ttl=1h  --insecure-bind-address=0.0.0.0  --kubelet-https=false  --service-cluster-ip-range=10.20.0.0/16  --service-node-port-range=30000-32767 --v=2
+        Restart=on-failure
+        RestartSec=5
+
+        [Install]
+        WantedBy=multi-user.target
+  cmd.run:
+    - name: systemctl daemon-reload &&  systemctl enable kube-api
+  service.running:
+    - name: kube-api
+
+
+kube-controller-systemd:
+  file.managed:
+    - name: /etc/systemd/system/kube-controller.service
+    - contents:  |
+        [Unit]
+        Description=Kubernetes Controller Manager
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+        [Service]
+        ExecStart=/usr/bin/kube-controller-manager --address=0.0.0.0 --allocate-node-cidrs=false --cluster-cidr=10.20.0.0/16 --cluster-name=kubernetes --master=http://192.168.80.10:8080 --service-cluster-ip-range=10.20.0.0/16 --v=2
+        Restart=on-failure
+        RestartSec=5
+
+        [Install]
+        WantedBy=multi-user.target
+  cmd.run:
+    - name: systemctl daemon-reload &&  systemctl enable kube-controller
+  service.running:
+    - name: kube-controller
+
+
+kube-scheduler-systemd:
+  file.managed:
+    - name: /etc/systemd/system/kube-scheduler.service
+    - contents:  |
+        [Unit]
+        Description=Kubernetes Scheduler
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+        [Service]
+        ExecStart=/usr/bin/kube-scheduler --leader-elect=true --master=http://192.168.80.10:8080 --v=2
+        Restart=on-failure
+        RestartSec=5
+
+        [Install]
+        WantedBy=multi-user.target
+  cmd.run:
+    - name: systemctl daemon-reload &&  systemctl enable kube-scheduler
+  service.running:
+    - name: kube-scheduler
