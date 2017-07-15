@@ -34,5 +34,7 @@ kubernetes v1.7.0
 you can control k8z master from master node or from host machine that vagrant is running on.
 
 
-## to do
-- [ ] kube-dns.
+
+to run kube-dns
+
+```kubectl create -f kube-dns.yaml```
