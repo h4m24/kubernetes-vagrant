@@ -24,9 +24,11 @@ docker --version =   Docker version 1.12.6, build 78d1802
 
 kubernetes v1.7.0
 
-/usr/local/flanneld --version =  v0.8.0-rc1-8-g4bc6cb2 ```
+/usr/local/flanneld --version =  v0.8.0-rc1-8-g4bc6cb2
+```
 
 ## to start
+
 ``` vagrant up ```
 
 you can control k8z master from master node or from host machine that vagrant is running on.
