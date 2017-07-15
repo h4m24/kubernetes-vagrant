@@ -35,4 +35,4 @@ you can control k8z master from master node or from host machine that vagrant is
 
 
 ## to do
-- [] kube-dns.
+- [ ] kube-dns.
