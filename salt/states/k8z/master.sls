@@ -86,3 +86,8 @@ kube-scheduler-systemd:
     - name: systemctl daemon-reload &&  systemctl enable kube-scheduler
   service.running:
     - name: kube-scheduler
+
+start-dashboard-pod:
+  cmd.run:
+    - unless: kubectl get pods | grep k8s-dashboard
+    - name: kubectl create -f /vagrant/deployment_examples/k8s-dashboard/k8s-dashboard-deployment.yaml
