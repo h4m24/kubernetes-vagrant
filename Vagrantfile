@@ -73,9 +73,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "k8z-master" do |web|
     web.vm.hostname = "k8z-master.vagrant"
-    web.hostsupdater.aliases = ["k8z-master.vagrant","k8z-master"]
+    web.hostsupdater.aliases = ["k8z-master.vagrant"]
     # web.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
-    web.hostmanager.aliases = %w(k8z-master.vagrant)
+    web.hostmanager.aliases = %w(k8z-master k8z-master.vagrant)
     web.vm.network "private_network", ip: "192.168.80.10"
     # config.vm.provision "shell", path: "./provision_master.sh"
     web.vm.provision :salt do |salt|
@@ -88,9 +88,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "k8z-minion-001" do |web|
     web.vm.hostname = "k8z-minion-001.vagrant"
-    web.hostsupdater.aliases = ["k8z-minion-001.vagrant","k8z-minion-001"]
+    web.hostsupdater.aliases = ["k8z-minion-001.vagrant"]
     # web.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
-    web.hostmanager.aliases = %w(k8z-minion-001.vagrant)
+    web.hostmanager.aliases = %w(k8z-minion-001 k8z-minion-001.vagrant)
     web.vm.network "private_network", ip: "192.168.80.20"
     web.vm.provision :salt do |salt|
       salt.masterless = true
@@ -102,9 +102,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "k8z-minion-002" do |web|
     web.vm.hostname = "k8z-minion-002.vagrant"
-    web.hostsupdater.aliases = ["k8z-minion-002.vagrant","k8z-minion-002"]
+    web.hostsupdater.aliases = ["k8z-minion-002.vagrant"]
     # web.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
-    web.hostmanager.aliases = %w(k8z-minion-002.vagrant)
+    web.hostmanager.aliases = %w(k8z-minion-002 k8z-minion-002.vagrant)
     web.vm.network "private_network", ip: "192.168.80.30"
     web.vm.provision :salt do |salt|
       salt.masterless = true
