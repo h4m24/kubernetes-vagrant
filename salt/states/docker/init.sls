@@ -21,12 +21,13 @@ docker-systemd:
         Documentation=http://docs.docker.io
 
         [Service]
+        EnvironmentFile=/run/flannel/subnet.env
         ExecStart=/usr/bin/docker daemon \
-          --iptables=false \
-          --ip-masq=false \
+          --iptables=true \
+          --ip-masq=true \
           --host=unix:///var/run/docker.sock \
           --log-level=error \
-          --bip=10.20.5.1/24 \
+          --bip=${FLANNEL_SUBNET} \ 
           --mtu=1450 \
           --storage-driver=overlay
         Restart=on-failure

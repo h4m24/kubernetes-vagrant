@@ -11,6 +11,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          command: [ "bash" ]
+          image: adiazmor/docker-ubuntu-with-ping
           ports:
           - containerPort: 80
