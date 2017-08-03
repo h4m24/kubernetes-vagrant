@@ -16,7 +16,25 @@ kube-api-systemd:
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
         [Service]
-        ExecStart=/usr/bin/kube-apiserver --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota  --advertise-address=192.168.80.10  --allow-privileged=true  --apiserver-count=1  --audit-log-maxage=30  --audit-log-maxbackup=3  --audit-log-maxsize=100  --audit-log-path=/var/lib/audit.log  --authorization-mode=AlwaysAllow  --bind-address=0.0.0.0  --enable-swagger-ui=true  --etcd-servers=http://etcd.vagrant:2379  --event-ttl=1h  --insecure-bind-address=0.0.0.0  --kubelet-https=false  --service-cluster-ip-range=10.20.0.0/16  --service-node-port-range=30000-32767 --v=2
+        ExecStart=/usr/bin/kube-apiserver \
+          --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota  \
+          --advertise-address=192.168.80.10  \
+          --allow-privileged=true  \
+          --apiserver-count=1  \
+          --audit-log-maxage=30  \
+          --audit-log-maxbackup=3  \
+          --audit-log-maxsize=100  \
+          --audit-log-path=/var/lib/audit.log  \
+          --authorization-mode=AlwaysAllow  \
+          --bind-address=0.0.0.0  \
+          --enable-swagger-ui=true  \
+          --etcd-servers=http://etcd.vagrant:2379  \
+          --event-ttl=1h  \
+          --insecure-bind-address=0.0.0.0  \
+          --kubelet-https=false  \
+          --service-cluster-ip-range=10.20.0.0/16  \
+          --service-node-port-range=30000-32767 \
+          --v=2
         Restart=on-failure
         RestartSec=5
 
