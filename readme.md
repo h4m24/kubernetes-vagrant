@@ -38,18 +38,3 @@ you can control k8z master from master node or from host machine that vagrant is
 to run kube-dns
 
 ```kubectl create -f kube-dns.yaml```
-
-
-## To Do
-- Add TLS
-```shell
-openssl req \
-  -subj '/CN=domain.com/O=My Company Name LTD./C=US' \
-  -new \
-  -newkey rsa:2048 \
-  -days 365 \
-  -nodes \
-  -x509 \
-  -keyout server.key \
-  -out server.crt
-  ```
