@@ -4,6 +4,7 @@ base:
   'k8z-master*':
     - flanneld
     - k8z.master
+    - flanneld
   'k8z-minion*':
     - docker
     - flanneld

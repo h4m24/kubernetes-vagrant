@@ -4,9 +4,9 @@
 kube-worker-bins:
   cmd.run:
     - name:   |
-        wget https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl -P /usr/bin/
-        wget https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kube-proxy -P /usr/bin/
-        wget https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubelet -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kube-proxy -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubelet -P /usr/bin/
         chmod +x /usr/bin/kube*
 
 # systemd files
