@@ -12,6 +12,7 @@ flanneld-systemd-file:
         [Unit]
         Description=flanneld
         Documentation=https://github.com/coreos/flanneld
+        Before=docker.service
         Conflicts=flanneld.service
 
         [Service]
