@@ -36,9 +36,3 @@ flanneld-systemd-file:
     - name: flanneld
     - watch:
       - file: /etc/systemd/system/flanneld.service
-# 
-# configure-docker:
-#   cmd.run:
-#     - name: |
-#         echo DOCKER_OPTS=$(cat /run/flannel/subnet.env | grep FLANNEL_SUBNET | awk -F"="  '{print $2}' | sed 's#/24##g')  >> /etc/default/docker
-#         service docker restart
