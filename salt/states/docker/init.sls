@@ -10,14 +10,19 @@ docker-install:
   cmd.run:
     - name: cp /opt/docker/docker* /usr/bin/
 
-
+# docker-sleep:
+#   cmd.run:
+#     - name: sleep 10s
 
 docker-systemd:
   file.managed:
+    - require:
+      - sls: flanneld
     - name: /etc/systemd/system/docker.service
     - contents:  |
         [Unit]
         Description=Docker Application Container Engine
+        After=flanneld.service
         Documentation=http://docs.docker.io
 
         [Service]
