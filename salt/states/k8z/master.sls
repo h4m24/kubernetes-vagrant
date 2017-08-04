@@ -20,7 +20,7 @@ kube-api-systemd:
         [Service]
         EnvironmentFile=/run/flannel/subnet.env
         ExecStart=/usr/bin/kube-apiserver \
-          --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota \
+          --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ServiceAccount,ResourceQuota \
           --advertise-address=192.168.80.10 \
           --allow-privileged=true \
           --apiserver-count=1 \
@@ -37,7 +37,11 @@ kube-api-systemd:
           --kubelet-https=true \
           --service-cluster-ip-range=${FLANNEL_NETWORK} \
           --service-node-port-range=30000-32767 \
-          --token-auth-file=/vagrant/config/users.csv
+          --token-auth-file=/vagrant/config/users.csv \
+          --service-account-key-file=/vagrant/config/service_account/serviceaccount.crt \
+          --tls-ca-file=/vagrant/config/tls/ca.crt \
+          --tls-cert-file=/vagrant/config/tls/server.crt \
+          --tls-private-key-file=/vagrant/config/tls/server.key \
           --v=2
         Restart=on-failure
         RestartSec=5
@@ -69,6 +73,8 @@ kube-controller-systemd:
           --cluster-name=kubernetes \
           --master=http://192.168.80.10:8080 \
           --service-cluster-ip-range=${FLANNEL_NETWORK} \
+          --service-account-private-key-file=/vagrant/config/service_account/serviceaccount.key \
+          --root-ca-file=/vagrant/config/tls/ca.crt \
           --v=2
         Restart=on-failure
         RestartSec=5
