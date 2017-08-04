@@ -1,5 +1,5 @@
 - [ ] etcd gui
 - [x] kubectl logs -f POD_ID => install self signed
-- [ ] kubernetes CLI config
+- [x] kubernetes CLI config
 - [x] install k8z dashboard
 - [ ] deploy nginx using ingress
