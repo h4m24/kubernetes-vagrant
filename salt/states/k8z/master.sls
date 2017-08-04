@@ -34,7 +34,7 @@ kube-api-systemd:
           --etcd-servers=http://etcd.vagrant:2379  \
           --event-ttl=1h  \
           --insecure-bind-address=0.0.0.0  \
-          --kubelet-https=false  \
+          --kubelet-https=true  \
           --service-cluster-ip-range=${FLANNEL_NETWORK}  \
           --service-node-port-range=30000-32767 \
           --v=2
