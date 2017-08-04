@@ -15,27 +15,22 @@ kubelet-config:
     - name: /var/lib/kubelet/kubeconfig
     - makedirs: true
     - contents:  |
-        current-context: federal-context
+        current-context: vagrant-context
         apiVersion: v1
         clusters:
         - cluster:
             api-version: v1
             server: http://k8z-master.vagrant:8080
-          name: cow-cluster
+          name: vagrant-cluster
         contexts:
         - context:
-            cluster: horse-cluster
-            namespace: chisel-ns
-            user: green-user
-          name: federal-context
+            cluster: vagrant-cluster
+            user: ""
+          name: vagrant-context
         kind: Config
         preferences:
           colors: true
-        users:
-        - name: blue-user
-          user:
-            token: blue-token
-
+        users: []
 
 Kubelet-systemd:
   file.managed:
