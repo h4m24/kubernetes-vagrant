@@ -25,12 +25,15 @@ kubelet-config:
         contexts:
         - context:
             cluster: vagrant-cluster
-            user: ""
+            user: kube-admin
           name: vagrant-context
         kind: Config
         preferences:
           colors: true
-        users: []
+        users:
+        - name: kube-admin
+          user:
+            token: RSr8Q00v4vJZ9riztLJZ2UbGA3vnu3KP
 
 Kubelet-systemd:
   file.managed:
