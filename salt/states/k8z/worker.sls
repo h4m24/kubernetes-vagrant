@@ -40,10 +40,20 @@ Kubelet-systemd:
         Description=Kubernetes Kubelet
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
         After=docker.service
+        After=flanneld.service
         Requires=docker.service
+        Requires=flanneld.service
 
         [Service]
-        ExecStart=/usr/bin/kubelet  --api-servers=http://k8z-master.vagrant:8080  --allow-privileged=true  --cluster-domain=cluster.local  --container-runtime=docker  --kubeconfig=/var/lib/kubelet/kubeconfig  --serialize-image-pulls=false  --register-node=true  --v=2
+        ExecStart=/usr/bin/kubelet \
+          --api-servers=http://k8z-master.vagrant:8080 \
+          --allow-privileged=true \
+          --cluster-domain=cluster.local \
+          --container-runtime=docker \
+          --kubeconfig=/var/lib/kubelet/kubeconfig \
+          --serialize-image-pulls=false \
+          --register-node=true \
+          --v=2
         Restart=on-failure
         RestartSec=5
 
@@ -64,7 +74,13 @@ kube-proxy-systemd:
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
         [Service]
-        ExecStart=/usr/bin/kube-proxy --cluster-cidr=10.20.0.0/16 --masquerade-all=true  --proxy-mode=iptables --v=2 --master=http://k8z-master.vagrant:8080
+        EnvironmentFile=/run/flannel/subnet.env
+        ExecStart=/usr/bin/kube-proxy \
+          --cluster-cidr=${FLANNEL_NETWORK} \
+          --masquerade-all=true  \
+          --proxy-mode=iptables \
+          --v=2 \
+          --master=http://k8z-master.vagrant:8080
         Restart=on-failure
         RestartSec=5
 

@@ -4,7 +4,6 @@ flannel-bin:
     - source: salt://flanneld/files/flanneld-amd64
     - mode: 0775
 
-
 flanneld-systemd-file:
   file.managed:
     - name: /etc/systemd/system/flanneld.service
@@ -22,7 +21,10 @@ flanneld-systemd-file:
         LimitNOFILE=40000
         TimeoutStartSec=0
 
-        ExecStart=/usr/local/flanneld -etcd-endpoints http://etcd.vagrant:2379  -etcd-prefix "/kubernetes-cluster/network" -iface=enp0s8
+        ExecStart=/usr/local/flanneld \
+          -etcd-endpoints http://etcd.vagrant:2379  \
+          -etcd-prefix "/kubernetes-cluster/network" \
+          -iface=enp0s8
         ExecReload=/bin/kill -HUP $MAINPID
         KillSignal=SIGTERM
 

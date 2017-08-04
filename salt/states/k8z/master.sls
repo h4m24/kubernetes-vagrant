@@ -14,8 +14,11 @@ kube-api-systemd:
         [Unit]
         Description=Kubernetes API Server
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        After=flanneld.service
+        Requires=flanneld.service
 
         [Service]
+        EnvironmentFile=/run/flannel/subnet.env
         ExecStart=/usr/bin/kube-apiserver \
           --admission-control=NamespaceLifecycle,LimitRanger,DefaultStorageClass,ResourceQuota  \
           --advertise-address=192.168.80.10  \
@@ -32,7 +35,7 @@ kube-api-systemd:
           --event-ttl=1h  \
           --insecure-bind-address=0.0.0.0  \
           --kubelet-https=false  \
-          --service-cluster-ip-range=10.20.0.0/16  \
+          --service-cluster-ip-range=${FLANNEL_NETWORK}  \
           --service-node-port-range=30000-32767 \
           --v=2
         Restart=on-failure
@@ -53,9 +56,19 @@ kube-controller-systemd:
         [Unit]
         Description=Kubernetes Controller Manager
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        After=flanneld.service
+        Requires=flanneld.service
 
         [Service]
-        ExecStart=/usr/bin/kube-controller-manager --address=0.0.0.0 --allocate-node-cidrs=false --cluster-cidr=10.20.0.0/16 --cluster-name=kubernetes --master=http://192.168.80.10:8080 --service-cluster-ip-range=10.20.0.0/16 --v=2
+        EnvironmentFile=/run/flannel/subnet.env
+        ExecStart=/usr/bin/kube-controller-manager \
+          --address=0.0.0.0 \
+          --allocate-node-cidrs=false \
+          --cluster-cidr=${FLANNEL_NETWORK} \
+          --cluster-name=kubernetes \
+          --master=http://192.168.80.10:8080 \
+          --service-cluster-ip-range=${FLANNEL_NETWORK} \
+          --v=2
         Restart=on-failure
         RestartSec=5
 
@@ -76,7 +89,10 @@ kube-scheduler-systemd:
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
         [Service]
-        ExecStart=/usr/bin/kube-scheduler --leader-elect=true --master=http://192.168.80.10:8080 --v=2
+        ExecStart=/usr/bin/kube-scheduler \
+          --leader-elect=true \
+          --master=http://192.168.80.10:8080 \
+          --v=2
         Restart=on-failure
         RestartSec=5
 

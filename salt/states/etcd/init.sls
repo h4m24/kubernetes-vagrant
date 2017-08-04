@@ -17,8 +17,6 @@ etcd-ctl:
     - source: /opt/etcd-v3.1.8-linux-amd64/etcdctl
     # - force: true
 
-
-
 etcd-systemd-file:
   file.managed:
     - name: /etc/systemd/system/etcd.service
@@ -35,7 +33,10 @@ etcd-systemd-file:
         LimitNOFILE=40000
         TimeoutStartSec=0
 
-        ExecStart=/usr/bin/etcd --name etcd-dev --listen-client-urls  http://0.0.0.0:2379 --advertise-client-urls http://etcd.vagrant:2379 
+        ExecStart=/usr/bin/etcd \
+          --name etcd-dev \
+          --listen-client-urls http://0.0.0.0:2379 \
+          --advertise-client-urls http://etcd.vagrant:2379
         ExecReload=/bin/kill -HUP $MAINPID
         KillSignal=SIGTERM
 
