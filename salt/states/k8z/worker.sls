@@ -52,6 +52,7 @@ Kubelet-systemd:
           --api-servers=http://k8z-master.vagrant:8080 \
           --allow-privileged=true \
           --cluster-domain=cluster.local \
+          --cluster-dns=10.20.53.53 \
           --container-runtime=docker \
           --kubeconfig=/var/lib/kubelet/kubeconfig \
           --serialize-image-pulls=false \

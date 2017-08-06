@@ -26,9 +26,10 @@ Vagrant.configure("2") do |config|
      '--cpus',                  '4',
     #  '--paravirtprovider',      'kvm', # can be set to "paravirt"
      '--ioapic',                'on', # turn on I/O APIC
-     '--natdnsproxy1',          'on',
-     '--uartmode1',             'disconnected', # disable ugly log cloudimg-consol.log file
-     '--natdnshostresolver1',   'on']
+    #  '--natdnsproxy1',          'on',
+    #  '--natdnshostresolver1',   'on',
+     '--uartmode1',             'disconnected' # disable ugly log cloudimg-consol.log file
+    ]
 
   end
 
