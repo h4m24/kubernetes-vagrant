@@ -1,5 +1,5 @@
 file_client: local
-
+state_output: mixed
 file_roots:
   base:
     - /vagrant/salt/states
