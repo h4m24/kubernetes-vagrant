@@ -1,13 +1,13 @@
 - [ ] batch jobs on cluster
+- [ ] create roles/namespaces dev stg live
 - [ ] full CI on cluster
 - [ ] horizental pod scaling
 - [ ] daemon sets.
 - [ ] config maps and secrets
-- [ ] replica sets & repica controllers
-- [ ] persistant volue claims
+- [ ] replica sets & replica controllers
+- [ ] persistant volume claims
 - [ ] stateful sets
 - [ ] etcd gui
 - [x] kubectl logs -f POD_ID => install self signed
 - [x] kubernetes CLI config
 - [x] install k8z dashboard
-- [x] deploy nginx using ingress
