@@ -5,6 +5,7 @@ base:
     - flanneld
     - k8z.master
     - flanneld
+    - dnsmasq
   'k8z-minion*':
     - docker
     - flanneld
