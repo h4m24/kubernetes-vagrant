@@ -1,0 +1,49 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkinsci/jenkins:2.67
+        ports:
+          - containerPort: 8080
+          - containerPort: 50000
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-web-ui
+  namespace: default
+spec:
+  selector:
+    app: jenkins
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-web-ui
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: jenkins.k8z-minion-001.vagrant
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins-web-ui
+          servicePort: 80
