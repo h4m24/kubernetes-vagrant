@@ -1,10 +1,10 @@
 kube-worker-bins:
   cmd.run:
     - name:   |
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-apiserver -P /usr/bin/
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-controller-manager -P /usr/bin/
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kube-scheduler -P /usr/bin/
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kube-apiserver -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kube-controller-manager -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kube-scheduler -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl -P /usr/bin/
         chmod +x /usr/bin/kube*
 
 kube-api-systemd:

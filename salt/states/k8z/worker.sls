@@ -4,9 +4,9 @@
 kube-worker-bins:
   cmd.run:
     - name:   |
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl -P /usr/bin/
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kube-proxy -P /usr/bin/
-        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubelet -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kube-proxy -P /usr/bin/
+        wget --quiet https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubelet -P /usr/bin/
         chmod +x /usr/bin/kube*
 
 # systemd files
@@ -49,7 +49,6 @@ Kubelet-systemd:
 
         [Service]
         ExecStart=/usr/bin/kubelet \
-          --api-servers=http://k8z-master.vagrant:8080 \
           --allow-privileged=true \
           --cluster-domain=cluster.local \
           --cluster-dns=10.20.53.53 \
