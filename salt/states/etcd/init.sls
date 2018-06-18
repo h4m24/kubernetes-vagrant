@@ -1,20 +1,20 @@
 etcd-server:
   archive.extracted:
     - name: /opt/
-    - source: https://github.com/coreos/etcd/releases/download/v3.1.8/etcd-v3.1.8-linux-amd64.tar.gz
+    - source: https://github.com/coreos/etcd/releases/download/v3.3.8/etcd-v3.3.8-linux-amd64.tar.gz
     - skip_verify: true
     - options: xzf
     - archive_format: tar
-    - if_missing: /opt/etcd-v3.1.8-linux-amd64
+    - if_missing: /opt/etcd-v3.3.8-linux-amd64
   file.copy:
     - name: /usr/bin/etcd
-    - source: /opt/etcd-v3.1.8-linux-amd64/etcd
+    - source: /opt/etcd-v3.3.8-linux-amd64/etcd
     - force: true
 
 etcd-ctl:
   file.copy:
     - name: /usr/bin/etcdctl
-    - source: /opt/etcd-v3.1.8-linux-amd64/etcdctl
+    - source: /opt/etcd-v3.3.8-linux-amd64/etcdctl
     # - force: true
 
 etcd-systemd-file:

@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: kubedns
-        image: gcr.io/google_containers/kubedns-amd64:1.8
+        image: gcr.io/google_containers/kubedns-amd64:1.14.10
         resources:
           limits:
             memory: 170Mi

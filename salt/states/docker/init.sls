@@ -2,11 +2,11 @@
 docker-install:
   archive.extracted:
     - name: /opt/
-    - source: https://get.docker.com/builds/Linux/x86_64/docker-1.12.6.tgz
+    - source: https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz
     - skip_verify: true
     - options: xzf
     - archive_format: tar
-    - if_missing: /opt/docker-1.12.6.tgz
+    - if_missing: /opt/docker-18.03.1-ce.tgz
   cmd.run:
     - name: cp /opt/docker/docker* /usr/bin/
 
@@ -27,7 +27,7 @@ docker-systemd:
 
         [Service]
         EnvironmentFile=/run/flannel/subnet.env
-        ExecStart=/usr/bin/docker daemon \
+        ExecStart=/usr/bin/dockerd \
           --iptables=true \
           --ip-masq=true \
           --host=unix:///var/run/docker.sock \
