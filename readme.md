@@ -6,8 +6,8 @@ this ran with/on, also provisions:
 vagrant --version = Vagrant 2.0.4 
 
 vagrant plugin list:
-  vagrant-hostmanager (1.8.9)
-  vagrant-hostsupdater (1.1.1.160)
+  vagrant-hostmanager (1.8.5)
+  vagrant-hostsupdater (1.0.2)
   vagrant-share (1.1.6, system)
 
 etcd --version:
